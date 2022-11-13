@@ -28,7 +28,12 @@ public class Employee {
     public void setDepartment (int department) {
         this.department = department;
     }
-    public void setSalary (int salary) {this.salary = salary;
+    public void setSalary (int salary) {
+        this.salary = salary;
+    }
+
+    public static int getCounter() {
+        return counter;
     }
 
     @Override

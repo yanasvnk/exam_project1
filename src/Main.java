@@ -10,7 +10,9 @@ public class Main {
         public static int calculateTotalSalary() {
             int sum = 0;
             for (int i = 0; i < employees.length; i++) {
-                sum += employees[i].getSalary();
+                if (employees[i] != null) {
+                    sum += employees[i].getSalary();
+                }
             }
             return sum;
         }
@@ -19,7 +21,7 @@ public class Main {
                 Employee result = employees[0];
                 int minSalary = employees[0].getSalary();
                 for (Employee employee : employees) {
-                    if (employee.getSalary() < minSalary) {
+                    if (employee != null && employee.getSalary() < minSalary) {
                         minSalary = employee.getSalary();
                         result = employee;
                     }
@@ -30,7 +32,7 @@ public class Main {
                 Employee result = employees[0];
                 int maxSalary = employees[0].getSalary();
                 for (Employee employee : employees) {
-                    if (employee.getSalary() > maxSalary) {
+                    if (employee != null && employee.getSalary() > maxSalary) {
                         maxSalary = employee.getSalary();
                         result = employee;
                     }
@@ -39,12 +41,20 @@ public class Main {
             }
 
             public static float calculateAverageSalary () {
-                return calculateTotalSalary() / (float) employees.length;
+                for (int i = 0; i < employees.length - 1; i++) {
+                    if (employees[i] == null) {
+     //                   throw new RuntimeException();
+                        System.out.println("Внимание! Сотрудник отсутствует.");
+                    }
+                }
+                return calculateTotalSalary() / Employee.getCounter();
             }
+
 
             public static void printFullNames () {
                 for (Employee employee : employees) {
-                    System.out.println(employee.getName());
+                    if (employee != null)
+                            System.out.println(employee.getName());
                 }
             }
             public static void main(String[] args) {
@@ -53,7 +63,7 @@ public class Main {
                         new Employee("Петров Пётр Петрович", 100_000, 2),
                         new Employee("Степанов Степан Степанович", 140_000, 3),
                         new Employee("Константинов Константин Константинович", 170_000, 3),
-                        new Employee("Игорев Игорь Игоревич", 200_000, 4),
+                        null,
                         new Employee("Зигизмундов Зигизмунд Зигизмундович", 300_000, 5),
                         new Employee("Максимов Максим Максимович", 450_000, 1),
                         new Employee("Фёдоров Фёдор Фёдорович", 470_000, 1),
